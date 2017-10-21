@@ -1,0 +1,14 @@
+# docker-compose.yml
+version: '2'
+
+networks:
+  app-network:
+    driver: bridge
+
+services:
+  app-memcache:
+    image: 'bitnami/memcached:latest'
+    ports:
+      - 11211:11211
+    networks:
+      - app-network
