@@ -25,17 +25,11 @@ set key value = do
   connection <- ask
   liftIO $ MemcacheClient.set connection key value 0 0
 
-flush :: ReaderT MemcacheClient.Client IO ()
-flush = do
-  connection <- ask
-  liftIO $ MemcacheClient.flush connection Nothing
-
 main :: IO ()
 main = do
   mc <- connection
 
   flip runReaderT mc $ do
-    flush
     get "counter" >>= liftIO . print
     set "counter" "1"
     get "counter" >>= liftIO . print
