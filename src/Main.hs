@@ -27,9 +27,9 @@ set key value = do
 
 main :: IO ()
 main = do
-  mc <- connection
+  conn <- connection
 
-  flip runReaderT mc $ do
+  flip runReaderT conn $ do
     get "counter" >>= liftIO . print
     set "counter" "1"
     get "counter" >>= liftIO . print
